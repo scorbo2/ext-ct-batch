@@ -198,6 +198,7 @@ public class BatchThread extends SimpleProgressWorker {
                     wasCancelled = true;
                     break;
                 }
+                currentStep++;
 
                 try {
                     totalProcessed.incrementAndGet();
