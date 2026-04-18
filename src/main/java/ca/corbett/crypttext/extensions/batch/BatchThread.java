@@ -111,7 +111,7 @@ public class BatchThread extends SimpleProgressWorker {
         return succeeded.get();
     }
 
-    public boolean isWasCancelled() {
+    public boolean wasCancelled() {
         return wasCancelled;
     }
 
