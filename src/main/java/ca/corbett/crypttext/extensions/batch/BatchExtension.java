@@ -1,19 +1,26 @@
 package ca.corbett.crypttext.extensions.batch;
 
+import ca.corbett.crypttext.AppConfig;
 import ca.corbett.crypttext.extensions.CryptTextExtension;
 import ca.corbett.extensions.AppExtensionInfo;
+import ca.corbett.extras.io.KeyStrokeManager;
 import ca.corbett.extras.properties.AbstractProperty;
+import ca.corbett.extras.properties.KeyStrokeProperty;
 
+import javax.swing.JMenuItem;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BatchExtension extends CryptTextExtension {
     private final AppExtensionInfo extInfo;
+    private final BatchDialogAction dialogAction;
 
     public BatchExtension() {
         extInfo = AppExtensionInfo.fromExtensionJar(getClass(), "/ca/corbett/crypttext/extensions/batch/extInfo.json");
         if (extInfo == null) {
             throw new RuntimeException("BatchExtension: can't parse extInfo.json from jar resources!");
         }
+        dialogAction = new BatchDialogAction();
     }
 
     /**
@@ -31,7 +38,27 @@ public class BatchExtension extends CryptTextExtension {
      */
     @Override
     protected List<AbstractProperty> createConfigProperties() {
-        return List.of(); // nothing yet
+        List<AbstractProperty> props = new ArrayList<>();
+        props.add(new KeyStrokeProperty(AppConfig.KEYSTROKE_PREFIX + "Batch.batchDialogKey",
+                                        "Show batch dialog:",
+                                        KeyStrokeManager.parseKeyStroke("Ctrl+B"), // default value
+                                        dialogAction)); // use a single action instance; its accelerator is auto-updated
+        return props;
+    }
+
+    /**
+     * We will contribute a menu item in the "Crypt" menu to launch our batch dialog.
+     *
+     * @param topLevelMenu The top-level menu being built. We only care about Crypt.
+     * @return A list of menu items to insert into the given menu, or null/empty list for none.
+     */
+    @Override
+    public List<JMenuItem> getMenuItems(String topLevelMenu) {
+        List<JMenuItem> items = new ArrayList<>();
+        if ("Crypt".equals(topLevelMenu)) {
+            items.add(new JMenuItem(dialogAction)); // re-use our dialog action so the accelerator is always correct
+        }
+        return items;
     }
 
     /**
