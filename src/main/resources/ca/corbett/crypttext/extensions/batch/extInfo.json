@@ -1,0 +1,12 @@
+{
+  "name": "Batch",
+  "author": "steve@corbett.ca",
+  "version": "1.2.0",
+  "targetAppName": "CryptText",
+  "targetAppVersion": "1.2",
+  "shortDescription": "Performs batch encryption or decryption operations",
+  "longDescription": "Hit Ctrl+B to bring up the batch dialog. This allows batch encryption or decryption of files, with optional recursion.",
+  "customFields": {
+    "Shortcut": "Ctrl+B"
+  }
+}
