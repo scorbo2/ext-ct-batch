@@ -170,28 +170,28 @@ public class BatchThread extends SimpleProgressWorker {
         succeeded.set(0);
         wasCancelled = false;
 
-        // If we were given garbage input, we're done immediately:
-        if (!directory.exists() || !directory.isDirectory() || !directory.canRead()) {
-            log.warning("BatchThread: given directory is not a readable directory: " + directory.getAbsolutePath());
-            return;
-        }
-
-        // We want our progress dialog to appear immediately, but we don't yet know how
-        // many files we have to process. Scanning the given directory may be a costly
-        // operation, depending on how large it is. So, as a bit of a hacky workaround,
-        // we'll fire progressBegins with a dummy total of 1, just to get the progress bar up:
-        fireProgressBegins(1);
-
-        // Scan our directory:
-        List<File> files = FileSystemUtil.findFiles(directory, recursive, extensions);
-
-        // Now we can properly set the bounds of our progress bar:
-        fireProgressBegins(files.size()); // A bit wonky to fire "begins" twice, but it is what it is.
-
-        final String verb = operation == Operation.ENCRYPT ? "Encrypting" : "Decrypting";
-        final String pastTenseVerb = operation == Operation.ENCRYPT ? "encrypted" : "decrypted";
-        int currentStep = 0;
         try {
+            // If we were given garbage input, we're done immediately:
+            if (!directory.exists() || !directory.isDirectory() || !directory.canRead()) {
+                log.warning("BatchThread: given directory is not a readable directory: " + directory.getAbsolutePath());
+                return;
+            }
+
+            // We want our progress dialog to appear immediately, but we don't yet know how
+            // many files we have to process. Scanning the given directory may be a costly
+            // operation, depending on how large it is. So, as a bit of a hacky workaround,
+            // we'll fire progressBegins with a dummy total of 1, just to get the progress bar up:
+            fireProgressBegins(1);
+
+            // Scan our directory:
+            List<File> files = FileSystemUtil.findFiles(directory, recursive, extensions);
+
+            // Now we can properly set the bounds of our progress bar:
+            fireProgressBegins(files.size()); // A bit wonky to fire "begins" twice, but it is what it is.
+
+            final String verb = operation == Operation.ENCRYPT ? "Encrypting" : "Decrypting";
+            final String pastTenseVerb = operation == Operation.ENCRYPT ? "encrypted" : "decrypted";
+            int currentStep = 0;
             for (File file : files) {
                 boolean shouldContinue = fireProgressUpdate(currentStep, verb + ": " + file.getAbsolutePath());
                 if (!shouldContinue) {
