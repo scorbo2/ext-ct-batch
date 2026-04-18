@@ -40,6 +40,7 @@ public class BatchDialog extends JDialog {
         super(MainWindow.getInstance(), "Batch encrypt/decrypt", true);
         setSize(460, 375);
         setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(MainWindow.getInstance());
         initComponents();
     }
