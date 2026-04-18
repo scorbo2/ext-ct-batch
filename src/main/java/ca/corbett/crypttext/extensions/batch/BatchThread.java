@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * <ol>
  *     <li>Supply an Operation (encrypt or decrypt), a directory, and whether to recurse into subdirectories.</li>
  *     <li>You must supply the password to use for encryption/decryption. This will apply to ALL files.</li>
- *     <lI>Supply this thread to a MultiProgressDialog to get automatic progress reporting and a cancel button.</li>
+ *     <li>Supply this thread to a MultiProgressDialog to get automatic progress reporting and a cancel button.</li>
  *     <li>Add a SimpleProgressListener to listen for completion or canceled events.</li>
  *     <li>On progressComplete, you can query for the results (total processed, number skipped/errored/succeeded)</li>
  *     <li>On progressCanceled, you can still query for the results that were processed up until the cancellation.</li>
