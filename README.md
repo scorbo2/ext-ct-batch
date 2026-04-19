@@ -77,6 +77,11 @@ cp target/ext-ct-batch-*.jar ~/.CryptText/extensions
 Simply restart CryptText if it was already running, and the extension should be available.
 To uninstall later, just delete the jar from the extensions directory and restart the application again.
 
+## More information
+
+- Project page: [ext-ct-batch](https://github.com/scorbo2/ext-ct-batch)
+- Issues tracker: [ext-ct-batch issues](https://github.com/scorbo2/ext-ct-batch/issues)
+
 ## Requirements
 
 Compatible with any `1.x` version of CryptText.
