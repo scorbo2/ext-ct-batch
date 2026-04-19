@@ -190,7 +190,6 @@ public class BatchThread extends SimpleProgressWorker {
             List<File> files = extensions.isEmpty()
                     ? FileSystemUtil.findFilesExcluding(directory, recursive, extensions)
                     : FileSystemUtil.findFiles(directory, recursive, extensions);
-                    
             // Now we can properly set the bounds of our progress bar:
             fireProgressBegins(files.size()); // A bit wonky to fire "begins" twice, but it is what it is.
 
