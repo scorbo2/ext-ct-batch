@@ -16,8 +16,8 @@ Here, you can configure the batch operation with the following options:
 - **Directory**: the directory to search for files to encrypt or decrypt.
 - **Include subdirectories**: check this to include files in subdirectories of the selected directory.
 - **Extensions**: a comma-separated list of file extensions to consider (without dots). The default value is "txt",
-  meaning `*.txt` files will be encrypted or decrypted. You can include additional file extensions with commas (
-  whitespace is ignored). For example: `txt, md, json` would include `*.txt`, `*.md`, and `*.json` files. Leave this
+  meaning `*.txt` files will be encrypted or decrypted. You can include additional file extensions with commas
+  (whitespace is ignored). For example: `txt, md, json` would include `*.txt`, `*.md`, and `*.json` files. Leave this
   field blank to scan for ALL files. However, note that binary files (non-text) are detected and skipped automatically.
   CryptText only works with text-based files.
 - **Log errors**: this option is always checked and can't be unselected. If an error occurs during the batch operation,
