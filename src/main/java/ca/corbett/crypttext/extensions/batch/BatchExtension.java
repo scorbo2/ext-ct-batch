@@ -11,6 +11,12 @@ import javax.swing.JMenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An extension for the CryptText application to allow batch encryption and decryption of
+ * text files in a given directory, with optional recursion.
+ *
+ * @author <a href="https://github.com/scorbo2">scorbo2</a>
+ */
 public class BatchExtension extends CryptTextExtension {
     private final AppExtensionInfo extInfo;
     private final BatchDialogAction dialogAction;
