@@ -25,7 +25,7 @@ Here, you can configure the batch operation with the following options:
 - **Log skipped files**: select this to include a log entry every time a file is skipped. This can happen if the given
   file is already in the desired state. For example, if Operation is "Encrypt", and a file that is already encrypted is
   encountered, it will be skipped. If this option is unselected, such events will not be logged.
-- **Log successfully processed lines**: select this to include a log entry every time a file is successfully encrypted
+- **Log successfully processed files**: select this to include a log entry every time a file is successfully encrypted
   or decrypted. If this option is unselected, only errors and skipped files will be logged.
 
 Hit OK to begin the operation. A progress dialog will appear, and the log will be updated in real time as files are
