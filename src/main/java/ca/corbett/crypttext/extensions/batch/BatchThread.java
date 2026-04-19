@@ -183,9 +183,14 @@ public class BatchThread extends SimpleProgressWorker {
             // we'll fire progressBegins with a dummy total of 1, just to get the progress bar up:
             fireProgressBegins(1);
 
-            // Scan our directory:
-            List<File> files = FileSystemUtil.findFiles(directory, recursive, extensions);
-
+            // Scan our directory. There's a goofy bug in FileSystemUtil where passing an empty list
+            // of extensions to findFiles() will always return an empty list, which is not what we need here.
+            // So, if our extension list is empty, we'll call findFilesExcluding() instead, which has
+            // the expected behavior of returning all files when given an empty list.
+            List<File> files = extensions.isEmpty()
+                    ? FileSystemUtil.findFilesExcluding(directory, recursive, extensions)
+                    : FileSystemUtil.findFiles(directory, recursive, extensions);
+                    
             // Now we can properly set the bounds of our progress bar:
             fireProgressBegins(files.size()); // A bit wonky to fire "begins" twice, but it is what it is.
 
