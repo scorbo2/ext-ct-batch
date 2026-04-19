@@ -1,5 +1,6 @@
 package ca.corbett.crypttext.extensions.batch;
 
+import ca.corbett.crypttext.Version;
 import ca.corbett.crypttext.ui.MainWindow;
 import ca.corbett.extras.MessageUtil;
 import ca.corbett.extras.ScrollUtil;
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,6 +38,7 @@ import java.util.logging.Logger;
 public class BatchDialog extends JDialog {
 
     private static final Logger log = Logger.getLogger(BatchDialog.class.getName());
+    private static File lastBrowseDirectory = Version.SETTINGS_DIR;
 
     private MessageUtil messageUtil;
     private FormPanel formPanel;
@@ -77,6 +80,9 @@ public class BatchDialog extends JDialog {
         formPanel.add(passwordField);
         directoryField = new FileField("Directory:", null, 15, FileField.SelectionType.ExistingDirectory);
         directoryField.setButtonIcon(SwingFormsResources.getEditIcon(16));
+        directoryField.setFile(lastBrowseDirectory != null && lastBrowseDirectory.exists()
+                                       ? lastBrowseDirectory
+                                       : Version.SETTINGS_DIR); // revert to default if lastBrowseDirectory is invalid
         formPanel.add(directoryField);
         recursiveCheckBox = new CheckBoxField("Include subdirectories", false);
         formPanel.add(recursiveCheckBox);
@@ -108,6 +114,9 @@ public class BatchDialog extends JDialog {
                 // The dialog stays open until the form is fixed or the user cancels.
                 return;
             }
+
+            // Store this directory for next time:
+            lastBrowseDirectory = directoryField.getFile();
 
             // Figure out logging levels:
             Level errorLevel = Level.WARNING; // not configurable
